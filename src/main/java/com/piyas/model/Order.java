@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +44,9 @@ public class Order {
     private int totalItem;
 
     private int totalPrice;
+
+
+
 
 
 

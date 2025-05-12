@@ -1,4 +1,4 @@
-package com.piyas.model;
+package com.piyas.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

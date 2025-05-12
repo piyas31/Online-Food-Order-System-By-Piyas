@@ -1,11 +1,11 @@
 package com.piyas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,19 +13,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Cart {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private User customer;
+    @ManyToOne
+    @JsonIgnore
+    private Cart cart;
 
-    private Long total;
+    @ManyToOne
+    private Food food;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<CartItem> items =new ArrayList<>();
+    private int quantity;
 
+    private List<String> ingredients;
 
+    private Long totalPrice;
 
 }

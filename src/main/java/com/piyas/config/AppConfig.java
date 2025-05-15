@@ -23,7 +23,7 @@ public class AppConfig {
 
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize -> Authorize
@@ -35,7 +35,7 @@ public class AppConfig {
                 .cors(cors->cors.configurationSource(corConfigurationSource()));
 
 
-        return null;
+        return http.build();
     }
 
     private CorsConfigurationSource corConfigurationSource() {

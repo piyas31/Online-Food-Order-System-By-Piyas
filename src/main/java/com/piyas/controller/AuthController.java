@@ -91,7 +91,7 @@ public class AuthController {
 
         AuthResponse authResponse=new AuthResponse();
         authResponse.setJwt(jwt);
-        authResponse.setMessage("Register Success");
+        authResponse.setMessage("Login Success");
 
         authResponse.setRole(USER_ROLE.valueOf(role));
 

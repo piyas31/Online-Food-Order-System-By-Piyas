@@ -35,7 +35,7 @@ public class RestaurantServiceImp implements RestaurantService{
         Restaurant restaurant=new Restaurant();
         restaurant.setAddress(address);
         restaurant.setContactInformation(req.getContactInformation());
-        restaurant.setCuisinetype(req.getCuisinetype());
+        restaurant.setCuisinetype(req.getCuisineType());
         restaurant.setDescription(req.getDescription());
         restaurant.setImages(req.getImages());
         restaurant.setName(req.getName());
@@ -51,7 +51,7 @@ public class RestaurantServiceImp implements RestaurantService{
         Restaurant restaurant=findRestaurantById(restaurantId);
 
         if(restaurant.getCuisinetype()!=null){
-            restaurant.setCuisinetype(updateRequest.getCuisinetype());
+            restaurant.setCuisinetype(updateRequest.getCuisineType());
         }
         if(restaurant.getDescription()!=null){
             restaurant.setDescription(updateRequest.getDescription());
@@ -84,7 +84,7 @@ public class RestaurantServiceImp implements RestaurantService{
     public Restaurant findRestaurantById(Long id) throws Exception {
         Optional<Restaurant> opt=restaurantRepository.findById(id);
 
-        if(opt.isPresent()){
+        if(!opt.isPresent()){
             throw new Exception("Restaurant not found with id "+id);
         }
         return opt.get();
@@ -121,10 +121,9 @@ public class RestaurantServiceImp implements RestaurantService{
     }
 
     @Override
-    public RestaurantDto updateRestaurantStatus(Long id) throws Exception {
-        Restaurant restaurant=findRestaurantById(id);
+    public Restaurant updateRestaurantStatus(Long id) throws Exception {
+        Restaurant restaurant = findRestaurantById(id);
         restaurant.setOpen(!restaurant.isOpen());
-
-        return (RestaurantDto) restaurantRepository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 }

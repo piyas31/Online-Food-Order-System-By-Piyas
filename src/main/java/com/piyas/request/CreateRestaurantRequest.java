@@ -12,7 +12,7 @@ public class CreateRestaurantRequest {
     private Long id;
     private String name;
     private String description;
-    private String cuisinetype;
+    private String cuisineType;
     private Address address;
     private ContactInformation contactInformation;
     private String openingHours;

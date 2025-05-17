@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Embeddable
-public class RestaurantDto extends Restaurant {
+public class RestaurantDto {
 
     private String title;
     @Column(length = 1000)

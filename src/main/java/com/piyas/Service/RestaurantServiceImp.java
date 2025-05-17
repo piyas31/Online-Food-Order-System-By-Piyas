@@ -8,6 +8,7 @@ import com.piyas.repository.AddressRepository;
 import com.piyas.repository.RestaurantRepository;
 import com.piyas.repository.UserRepository;
 import com.piyas.request.CreateRestaurantRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -100,23 +101,36 @@ public class RestaurantServiceImp implements RestaurantService{
     }
 
     @Override
+    @Transactional
     public RestaurantDto addToFavorite(Long restaurantId, User user) throws Exception {
 
-        Restaurant restaurant=findRestaurantById(restaurantId);
+        Restaurant restaurant = findRestaurantById(restaurantId);
 
-        RestaurantDto dto=new RestaurantDto();
+        RestaurantDto dto = new RestaurantDto();
         dto.setDescription(restaurant.getDescription());
         dto.setImages(restaurant.getImages());
         dto.setTitle(restaurant.getName());
         dto.setId(restaurantId);
 
-        if(user.getFavourites().contains(dto)){
-
-            user.getFavourites().remove(dto);
+       boolean isFavorited = false;
+        List<RestaurantDto> favorites = user.getFavorites();
+        for (RestaurantDto favorite : favorites) {
+            if (favorite.getId().equals(restaurantId)) {
+                isFavorited = true;
+                break;
+            }
         }
-        else user.getFavourites().add(dto);
+       if (isFavorited) {
+           favorites.removeIf(favorite -> favorite.getId().equals(restaurantId));
+       }
+       else {
+           favorites.add(dto);
+       }
 
         userRepository.save(user);
+
+
+
         return dto;
     }
 

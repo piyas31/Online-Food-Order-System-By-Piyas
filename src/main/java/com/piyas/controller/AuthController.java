@@ -45,7 +45,7 @@ public class AuthController {
     private CartRepository cartRepository;
 
 
-    @PostMapping("/signp")
+    @PostMapping("/signup")
     public ResponseEntity<AuthResponse>createUserHandler(@RequestBody User user){
 
         User isEmailExist=userRepository.findByEmail(user.getEmail());

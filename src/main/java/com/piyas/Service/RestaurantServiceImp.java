@@ -134,6 +134,7 @@ public class RestaurantServiceImp implements RestaurantService{
         return dto;
     }
 
+
     @Override
     public Restaurant updateRestaurantStatus(Long id) throws Exception {
         Restaurant restaurant = findRestaurantById(id);

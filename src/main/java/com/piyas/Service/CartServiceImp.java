@@ -90,6 +90,7 @@ public class CartServiceImp implements CartService{
             total+=cartItem.getFood().getPrice()*cartItem.getQuantity();
         }
         return total;
+        return total;
     }
 
     @Override
